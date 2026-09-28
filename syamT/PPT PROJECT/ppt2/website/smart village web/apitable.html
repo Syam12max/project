@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>API Data Table</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #198754;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 25px;
+            background: #198754;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #146c43;
+        }
+
+        #status {
+            text-align: center;
+            margin: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background: #198754;
+            color: white;
+            padding: 14px;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        tr:hover {
+            background: #e8f5e9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Smart Village API Data</h1>
+
+        <button onclick="getData()">
+            Get API Data
+        </button>
+
+        <div id="status">
+            Click the button to load API data
+        </div>
+
+        <!-- TABLE -->
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+
+            <tbody id="tableBody">
+                <!-- API data will come here -->
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <script>
+
+        async function getData() {
+
+            const tableBody =
+                document.getElementById("tableBody");
+
+            const status =
+                document.getElementById("status");
+
+
+            status.innerText = "Loading...";
+
+            tableBody.innerHTML = "";
+
+
+            try {
+
+                const response = await fetch(
+                    "https://3h0jj9j1-5000.inc1.devtunnels.ms/ask_my_llm",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            input:
+                            "Give me village development information"
+                        })
+                    }
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "HTTP Error: " + response.status
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                let serialNumber = 1;
+
+
+                Object.entries(data).forEach(
+                    ([key, value]) => {
+
+                        const row =
+                            document.createElement("tr");
+
+
+                        row.innerHTML = `
+                            <td>${serialNumber}</td>
+                            <td>${key}</td>
+                            <td>${value}</td>
+                        `;
+
+
+                        tableBody.appendChild(row);
+
+
+                        serialNumber++;
+
+                    }
+                );
+
+
+                status.innerText =
+                    "Data loaded successfully!";
+
+            }
+
+
+            catch (error) {
+
+                status.innerText =
+                    "Error: " + error.message;
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

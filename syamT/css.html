@@ -1,0 +1,80 @@
+<html>
+    <head><title>css class</title></head>
+    <style>
+button:hover{
+    background-color: blanchedalmond;
+    color: blue;
+}
+button{
+    background-color: aliceblue;
+    color: brown;
+    border-radius: 10px;
+    padding: 10px;
+}
+input:focus{
+    color:blue;
+}
+p{
+    font-size:20px ;
+    font-style: italic;
+    color: darkblue;
+}
+#student{
+    color: brown;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.employee{
+    color: olivedrab;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+h1{
+    text-align: center;
+    color: tomato;
+}
+
+div p{
+    color: chocolate;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+div >p{
+    background-color: lightcyan;
+}
+input[type="text"]{
+    border: 2px solid yellowgreen;
+    background-color: yellow;
+}
+input[type="radio"]{
+    background-color: brown;
+    accent-color: red;
+}
+h1::before{
+    content:"*" ;
+}
+h1::after{
+    content: "*";
+}
+    </style>
+    <body>
+        <h1>welcome to aarohan</h1>
+        <p>we are learning html and css and also interested in AI</p>
+        <p id="student">student interested in reading books and playing cricket</p>
+        <p class="employee">interested in reading book and playing cricket</p>
+        <div>
+            <p>we interested playing cricket</p>
+            <section>
+                <p>we are interested in chess</p>
+            </section>
+        </div>
+        <label for="name">name:</label>
+        <input type="text" id="name">
+<br><br>
+        <label for="gender">gender:</label>
+        
+        <label for="gender">male</label>
+        <input type="radio" id="gender" name="gender" value="female">
+        <label for="gender">female</label>
+        <input type="radio" id="gender" name="gender" value="female">
+        <br><br>
+        <button>submit</button>
+    </body>
+</html>

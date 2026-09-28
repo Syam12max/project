@@ -1,0 +1,48 @@
+body{
+    background-color:lightblue ;
+    justify-items: center;
+    
+  
+   
+
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+form{
+    border: 10px solid lightcoral;
+    padding:50px;
+    border-radius: 10px;
+    margin: 100px;
+    justify-content: right;
+}
+input{
+    border-radius: 10px;
+    
+    
+
+}
+textarea{
+    border-radius: 10px;
+}
+button{
+    border-radius: 10px;
+    background-color: blanchedalmond;
+
+}
+button:hover{
+    background-color:orange;
+    color: blue;
+}
+label{
+    color:blueviolet
+}
+div.input{
+   color: brown;
+   
+}
+h1{
+    color: darkred;
+}

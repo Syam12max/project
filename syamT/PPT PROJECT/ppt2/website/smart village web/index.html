@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Village - Mana Grama Abhivruddhi | మన గ్రామ అభివృద్ధి</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Noto Sans Telugu -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandHeader: '#0a5c28',
+                        brandBg: '#d8ebd6',
+                        brandAccent: '#388e3c',
+                        brandDarkGreen: '#073d1a',
+                        sageLight: '#f1f8f0',
+                        sageBorder: '#b3d8af'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans Telugu', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #d8ebd6;
+            color: #1e293b;
+            font-family: 'Inter', 'Noto Sans Telugu', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .bg-sage-card {
+            background-color: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(8px);
+        }
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(10, 92, 40, 0.92) 0%, rgba(7, 61, 26, 0.85) 100%);
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 30px -5px rgba(10, 92, 40, 0.12);
+        }
+        .progress-bar-animated {
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #d8ebd6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #388e3c;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0a5c28;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <div id="toastContainer" class="fixed top-20 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <header class="sticky top-0 z-40 bg-brandHeader text-white shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('hero')">
+                    <div class="w-12 h-12 bg-white text-brandHeader rounded-full flex items-center justify-center font-bold text-2xl shadow-inner border-2 border-green-300">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold tracking-tight leading-tight">Smart Village</h1>
+                        <p class="text-xs sm:text-sm font-medium text-green-200">మన గ్రామ అభివృద్ధి (Mana Grama Abhivruddhi)</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-3 items-center text-sm font-medium">
+                    <a href="#about" class="px-3 py-2 rounded-lg hover:bg-green-800 transition">About / గురించి</a>
+                    <a href="#focus-areas" class="px-3 py-2 rounded-lg hover:bg-green-800 transition">Focus Areas</a>
+                    <a href="#projects" class="px-3 py-2 rounded-lg hover:bg-green-800 transition">Projects / ప్రగతి</a>
+                    <a href="#grievance" class="px-3 py-2 rounded-lg hover:bg-green-800 transition">Grievances / ఫిర్యాదులు</a>
+                    <a href="#gallery" class="px-3 py-2 rounded-lg hover:bg-green-800 transition">Gallery</a>
+                </nav>
+
+                <!-- Admin & Mobile Toggle -->
+                <div class="flex items-center space-x-3">
+                    <button id="adminToggleBtn" onclick="toggleAdminModal()" class="bg-white/10 hover:bg-white/20 text-white border border-green-300/40 px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-2 transition shadow-sm">
+                        <i id="adminBtnIcon" class="fa-solid fa-lock"></i>
+                        <span id="adminBtnText">Admin Login</span>
+                    </button>
+                    <!-- Mobile Hamburger -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-white hover:text-green-200 p-2 text-xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-brandDarkGreen border-t border-green-800 px-4 pt-2 pb-4 space-y-2">
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-900">About / గురించి</a>
+            <a href="#focus-areas" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-900">Focus Areas</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-900">Projects / ప్రగతి</a>
+            <a href="#grievance" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-900">Grievances / ఫిర్యాదులు</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-green-900">Gallery</a>
+        </div>
+    </header>
+
+    <section id="hero" class="relative text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-cover bg-center overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80');">
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="relative max-w-5xl mx-auto text-center space-y-6">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-green-500/30 text-green-100 border border-green-400/30">
+                <i class="fa-solid fa-leaf text-green-300"></i> Digital Empowerment for Rural India
+            </span>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                Building Stronger Rural Communities
+            </h1>
+            <p class="text-lg sm:text-xl text-green-100 max-w-3xl mx-auto font-light">
+                సుస్థిర మరియు అనుసంధానిత గ్రామీణాభివృద్ధి కోసం ఆధునిక డిజిటల్ ప్లాట్‌ఫామ్. Transparent governance, instant grievance tracking, and infrastructure progress at your fingertips.
+            </p>
+            <div class="pt-4 flex flex-wrap justify-center gap-4">
+                <a href="#grievance" class="bg-brandAccent hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> File a Grievance / ఫిర్యాదు చేయండి
+                </a>
+                <a href="#projects" class="bg-white/20 hover:bg-white/30 text-white font-semibold px-6 py-3 rounded-xl backdrop-blur-md border border-white/30 transition flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line"></i> View Live Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            <div class="bg-sage-card p-5 rounded-2xl custom-shadow border border-sageBorder text-center transform hover:-translate-y-1 transition">
+                <div class="w-12 h-12 bg-green-100 text-brandHeader rounded-xl mx-auto flex items-center justify-center text-2xl mb-2">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="text-2xl sm:text-3xl font-extrabold text-brandHeader" id="statPopulation">4,850</div>
+                <div class="text-xs sm:text-sm font-medium text-slate-600">Total Population / జనాభా</div>
+            </div>
+            <div class="bg-sage-card p-5 rounded-2xl custom-shadow border border-sageBorder text-center transform hover:-translate-y-1 transition">
+                <div class="w-12 h-12 bg-green-100 text-brandHeader rounded-xl mx-auto flex items-center justify-center text-2xl mb-2">
+                    <i class="fa-solid fa-house-chimney"></i>
+                </div>
+                <div class="text-2xl sm:text-3xl font-extrabold text-brandHeader" id="statHouseholds">1,120</div>
+                <div class="text-xs sm:text-sm font-medium text-slate-600">Households / ఇళ్ళు</div>
+            </div>
+            <div class="bg-sage-card p-5 rounded-2xl custom-shadow border border-sageBorder text-center transform hover:-translate-y-1 transition">
+                <div class="w-12 h-12 bg-green-100 text-brandHeader rounded-xl mx-auto flex items-center justify-center text-2xl mb-2">
+                    <i class="fa-solid fa-faucet-drip"></i>
+                </div>
+                <div class="text-2xl sm:text-3xl font-extrabold text-brandHeader" id="statWaterOutlets">860</div>
+                <div class="text-xs sm:text-sm font-medium text-slate-600">Clean Water Outlets / మంచినీరు</div>
+            </div>
+            <div class="bg-sage-card p-5 rounded-2xl custom-shadow border border-sageBorder text-center transform hover:-translate-y-1 transition">
+                <div class="w-12 h-12 bg-green-100 text-brandHeader rounded-xl mx-auto flex items-center justify-center text-2xl mb-2">
+                    <i class="fa-solid fa-solar-panel"></i>
+                </div>
+                <div class="text-2xl sm:text-3xl font-extrabold text-brandHeader" id="statSolarLights">340</div>
+                <div class="text-xs sm:text-sm font-medium text-slate-600">Solar Lights / సోలార్ లైట్లు</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="focus-areas" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-brandHeader font-semibold text-sm uppercase tracking-wider">Key Pillars / ప్రధాన విభాగాలు</span>
+            <h2 class="text-3xl font-bold text-slate-900 mt-1">Core Development Focus Areas</h2>
+            <p class="text-slate-600 mt-2">గ్రామీణాభివృద్ధి కోసం మేము చేపట్టిన మూడు ప్రధాన రంగాలు మరియు వాటి వివరాలు.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Education Card -->
+            <div class="bg-sage-card rounded-2xl overflow-hidden border border-sageBorder custom-shadow hover:shadow-xl transition group flex flex-col justify-between">
+                <div>
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="p-6">
+                        <div class="w-10 h-10 bg-green-100 text-brandHeader rounded-lg flex items-center justify-center text-xl mb-4 -mt-11 shadow border border-white">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Education / విద్య</h3>
+                        <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                            Quality learning programs, digital smart classrooms, digital literacy for youth, and student scholarship assistance.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openModal('eduModal')" class="w-full bg-slate-100 hover:bg-brandHeader hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl border border-slate-200 transition text-sm flex items-center justify-center gap-2">
+                        Know More / వివరాలు <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Swachh Village Card -->
+            <div class="bg-sage-card rounded-2xl overflow-hidden border border-sageBorder custom-shadow hover:shadow-xl transition group flex flex-col justify-between">
+                <div>
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="p-6">
+                        <div class="w-10 h-10 bg-green-100 text-brandHeader rounded-lg flex items-center justify-center text-xl mb-4 -mt-11 shadow border border-white">
+                            <i class="fa-solid fa-broom"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Swachh Village / పరిశుభ్రత</h3>
+                        <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                            Door-to-door waste collection, wet/dry waste segregation, community sanitation drives, and underground drainage maintenance.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openModal('swachhModal')" class="w-full bg-slate-100 hover:bg-brandHeader hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl border border-slate-200 transition text-sm flex items-center justify-center gap-2">
+                        Know More / వివరాలు <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Roads & Water Card -->
+            <div class="bg-sage-card rounded-2xl overflow-hidden border border-sageBorder custom-shadow hover:shadow-xl transition group flex flex-col justify-between">
+                <div>
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('images/road and water.jpeg');"></div>
+                    <div class="p-6">
+                        <div class="w-10 h-10 bg-green-100 text-brandHeader rounded-lg flex items-center justify-center text-xl mb-4 -mt-11 shadow border border-white">
+                            <i class="fa-solid fa-road"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Roads & Water / రోడ్లు & మంచినీరు</h3>
+                        <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                            CC road construction, safe RO filtered drinking water supply, solar street illumination, and rainwater harvesting units.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openModal('infraModal')" class="w-full bg-slate-100 hover:bg-brandHeader hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl border border-slate-200 transition text-sm flex items-center justify-center gap-2">
+                        Know More / వివరాలు <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="grievance" class="py-16 bg-white/60 border-y border-sageBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brandHeader font-semibold text-sm uppercase tracking-wider">Redressal Portal / ఫిర్యాదులు</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Citizen Grievance Redressal System</h2>
+                <p class="text-slate-600 mt-2">మీ గ్రామంలోని మంచినీరు, రోడ్లు, లేదా విద్యుత్ సమస్యలను ఇక్కడ వెంటనే నమోదు చేయండి.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Grievance Submission Form -->
+                <div class="lg:col-span-5 bg-sage-card p-6 sm:p-8 rounded-2xl border border-sageBorder custom-shadow">
+                    <h3 class="text-xl font-bold text-brandHeader mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-pen-to-square"></i> Submit Complaint / ఫిర్యాదు సబ్మిట్ చేయండి
+                    </h3>
+                    <form id="grievanceForm" onsubmit="handleGrievanceSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Citizen Name / మీ పేరు *</label>
+                            <input type="text" id="citizenName" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brandHeader focus:outline-none text-sm" placeholder="e.g. Ramesh Kumar">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Phone Number / ఫోన్ నంబర్ *</label>
+                            <input type="tel" id="citizenPhone" required pattern="[0-9]{10}" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brandHeader focus:outline-none text-sm" placeholder="10-digit mobile number">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Category / విభాగం *</label>
+                            <select id="grievanceCategory" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brandHeader focus:outline-none text-sm bg-white">
+                                <option value="">Select Category / ఎంచుకోండి</option>
+                                <option value="Water Supply">Water Supply / మంచినీరు</option>
+                                <option value="Roads & Drainage">Roads & Drainage / రోడ్లు & డ్రైనేజీ</option>
+                                <option value="Electricity & Solar">Electricity & Solar / కరెంటు & వీధి లైట్లు</option>
+                                <option value="Sanitation & Garbage">Sanitation & Garbage / పారిశుధ్యం & చెత్త</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Issue Description / సమస్య వివరణ *</label>
+                            <textarea id="grievanceDesc" required rows="3" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brandHeader focus:outline-none text-sm" placeholder="Describe the problem and location details..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brandAccent hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Register Grievance / దాఖలు చేయండి
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Live Complaints Status Table -->
+                <div class="lg:col-span-7 bg-sage-card p-6 sm:p-8 rounded-2xl border border-sageBorder custom-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                            <h3 class="text-xl font-bold text-brandHeader flex items-center gap-2">
+                                <i class="fa-solid fa-list-check"></i> Live Complaints Log / ప్రత్యక్ష ఫిర్యాదులు
+                            </h3>
+                            <span class="text-xs bg-green-100 text-brandHeader font-bold px-3 py-1 rounded-full border border-green-300">
+                                Real-time Local State
+                            </span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs sm:text-sm">
+                                <thead>
+                                    <tr class="bg-green-800 text-white rounded-lg">
+                                        <th class="p-3 rounded-l-lg">ID</th>
+                                        <th class="p-3">Citizen & Category</th>
+                                        <th class="p-3">Date</th>
+                                        <th class="p-3">Status</th>
+                                        <th id="adminColHeader" class="p-3 rounded-r-lg hidden">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="grievanceTableBody" class="divide-y divide-slate-200">
+                                    <!-- Dynamic Rows Generated Here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-green-50 rounded-xl border border-green-200 text-xs text-slate-600 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-brandHeader text-sm"></i>
+                        <span>Complaints are automatically reviewed by the Panchayat Secretary within 24 hours.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-between items-end mb-10 gap-4">
+            <div>
+                <span class="text-brandHeader font-semibold text-sm uppercase tracking-wider">Infrastructure Progress / ప్రాజెక్ట్ వివరాలు</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Village Development Projects</h2>
+                <p class="text-slate-600 mt-1">గ్రామంలో పురోగతిలో ఉన్న మరియు పూర్తయిన అభివృద్ధి పనుల వివరాలు.</p>
+            </div>
+            <!-- Admin Add Project Button (Shown when logged in) -->
+            <div id="addProjectAdminContainer" class="hidden">
+                <button onclick="openModal('addProjectModal')" class="bg-brandHeader hover:bg-green-900 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Add New Project
+                </button>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic Project Cards Rendered via JS -->
+        </div>
+    </section>
+
+    <section id="gallery" class="py-16 bg-white/60 border-y border-sageBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <span class="text-brandHeader font-semibold text-sm uppercase tracking-wider">Visual Showcase / ఫోటో గ్యాలరీ</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Smart Village Life & Progress</h2>
+            </div>
+
+            <!-- Gallery Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button onclick="filterGallery('all')" class="gallery-filter-btn bg-brandHeader text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition">All / అన్నీ</button>
+                <button onclick="filterGallery('agriculture')" class="gallery-filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition">Agriculture</button>
+                <button onclick="filterGallery('education')" class="gallery-filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition">Education</button>
+                <button onclick="filterGallery('sanitation')" class="gallery-filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition">Sanitation</button>
+                <button onclick="filterGallery('infrastructure')" class="gallery-filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition">Infrastructure</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Gallery items dynamic -->
+            </div>
+        </div>
+    </section>
+
+    <section id="feedback" class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-sage-card p-8 rounded-3xl border border-sageBorder custom-shadow text-center">
+            <span class="text-brandHeader font-semibold text-sm uppercase tracking-wider">Your Voice Matters / అభిప్రాయాలు</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">Citizen Feedback & Rating</h2>
+            <p class="text-slate-600 text-sm mt-2">మా గ్రామపాలన మరియు డిజిటల్ సేవల పై మీ రేటింగ్ మరియు అభిప్రాయాన్ని తెలియజేయండి.</p>
+
+            <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)" class="mt-6 space-y-4 max-w-xl mx-auto text-left">
+                <!-- Rating Stars -->
+                <div class="text-center mb-4">
+                    <label class="block text-xs font-semibold text-slate-700 uppercase mb-2">Overall Satisfaction Rating</label>
+                    <div class="flex justify-center space-x-2 text-2xl text-slate-300" id="starRatingContainer">
+                        <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(1)"></i>
+                        <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(2)"></i>
+                        <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(3)"></i>
+                        <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(4)"></i>
+                        <i class="fa-solid fa-star cursor-pointer hover:text-amber-400 transition" onclick="setRating(5)"></i>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <input type="text" id="feedbackName" required placeholder="Your Name" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brandHeader focus:outline-none">
+                    </div>
+                    <div>
+                        <input type="text" id="feedbackLocation" placeholder="Wards / Habitation (e.g. Ward 3)" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brandHeader focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <textarea id="feedbackText" required rows="3" placeholder="Share your suggestions or compliments..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brandHeader focus:outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brandAccent hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow transition">
+                    Submit Feedback / అభిప్రాయాన్ని సమర్పించండి
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-brandDarkGreen text-white py-12 mt-auto border-t border-green-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="w-10 h-10 bg-white text-brandHeader rounded-full flex items-center justify-center font-bold text-xl">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <span class="font-bold text-xl">Mana Grama Abhivruddhi</span>
+                </div>
+                <p class="text-xs text-green-200 leading-relaxed">
+                    A digital initiative for transparent governance, rural infrastructure development, and citizen grievance redressal.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider mb-3 text-green-300">Quick Links</h4>
+                <ul class="space-y-1.5 text-xs text-green-100">
+                    <li><a href="#about" class="hover:underline">Panchayat Governance</a></li>
+                    <li><a href="#focus-areas" class="hover:underline">Key Focus Areas</a></li>
+                    <li><a href="#grievance" class="hover:underline">Grievance Portal</a></li>
+                    <li><a href="#projects" class="hover:underline">Project Progress Bar</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider mb-3 text-green-300">Panchayat Office</h4>
+                <p class="text-xs text-green-200 space-y-1">
+                    <span><i class="fa-solid fa-location-dot mr-1"></i> Main Road, Panchayat Bhavan, Grama Ward 2</span><br>
+                    <span><i class="fa-solid fa-phone mr-1"></i> Helpline: +91 1800-425-0099</span><br>
+                    <span><i class="fa-solid fa-envelope mr-1"></i> support@smartvillage.gov.in</span>
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mt-8 border-t border-green-800 text-center text-xs text-green-300">
+            © 2026 Smart Village - Mana Grama Abhivruddhi. Designed for Rural Empowerment.
+        </div>
+    </footer>
+
+    <!-- Modal Backdrop -->
+    <div id="modalBackdrop" onclick="closeAllModals()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+
+    <!-- Education Modal -->
+    <div id="eduModal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-11/12 max-w-lg bg-white p-6 rounded-2xl shadow-2xl hidden">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-brandHeader flex items-center gap-2"><i class="fa-solid fa-graduation-cap"></i> Education Initiatives / విద్య</h3>
+            <button onclick="closeAllModals()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="text-sm text-slate-600 space-y-3">
+            <p><strong>1. Digital Classrooms:</strong> Equipped with interactive screens and solar power backup in the Mandal Primary School.</p>
+            <p><strong>2. Scholarship Guidance:</strong> Free weekly counseling for higher education and government post-metric scholarships.</p>
+            <p><strong>3. Adult Literacy:</strong> Evening computer awareness classes for farmers and self-help group (SHG) women.</p>
+        </div>
+    </div>
+
+    <!-- Swachh Modal -->
+    <div id="swachhModal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-11/12 max-w-lg bg-white p-6 rounded-2xl shadow-2xl hidden">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-brandHeader flex items-center gap-2"><i class="fa-solid fa-broom"></i> Swachh Village Initiatives</h3>
+            <button onclick="closeAllModals()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="text-sm text-slate-600 space-y-3">
+            <p><strong>1. Waste Segregation:</strong> Dual green/blue bins provided to every household for wet and dry waste separation.</p>
+            <p><strong>2. Micro-Composting:</strong> Organic waste converted into organic fertilizer for agricultural distribution.</p>
+            <p><strong>3. Drain Cleaning:</strong> Bi-weekly desilting of village drains to prevent monsoon stagnation.</p>
+        </div>
+    </div>
+
+    <!-- Infrastructure Modal -->
+    <div id="infraModal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-11/12 max-w-lg bg-white p-6 rounded-2xl shadow-2xl hidden">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-brandHeader flex items-center gap-2"><i class="fa-solid fa-road"></i> Roads & Water Infrastructure</h3>
+            <button onclick="closeAllModals()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="text-sm text-slate-600 space-y-3">
+            <p><strong>1. Overhead RO Plant:</strong> Clean filtered drinking water supplied to 860 household tap connections.</p>
+            <p><strong>2. Concrete Roads:</strong> 4.5 km of weather-resilient cement concrete roads laid across Wards 1 to 5.</p>
+            <p><strong>3. Solar Street Lights:</strong> Automatic dusk-to-dawn LED solar lamps installed along main village thoroughfares.</p>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-11/12 max-w-md bg-white p-6 sm:p-8 rounded-2xl shadow-2xl hidden">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-brandHeader flex items-center gap-2"><i class="fa-solid fa-user-shield"></i> Admin Login / అడ్మిన్ లాగిన్</h3>
+            <button onclick="closeAllModals()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <p class="text-xs text-slate-500 mb-4">Default Demo Credentials: Username: <strong>admin</strong> | Password: <strong>admin123</strong></p>
+        <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Username</label>
+                <input type="text" id="adminUser" required value="admin" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brandHeader focus:outline-none">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Password</label>
+                <input type="password" id="adminPass" required value="admin123" class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brandHeader focus:outline-none">
+            </div>
+            <button type="submit" class="w-full bg-brandHeader hover:bg-green-900 text-white font-bold py-2.5 rounded-xl shadow transition text-sm">
+                Login / ప్రవేశించండి
+            </button>
+        </form>
+    </div>
+
+    <!-- Add Project Modal (Admin Only) -->
+    <div id="addProjectModal" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-11/12 max-w-lg bg-white p-6 rounded-2xl shadow-2xl hidden">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-brandHeader flex items-center gap-2"><i class="fa-solid fa-folder-plus"></i> Add New Development Project</h3>
+            <button onclick="closeAllModals()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <form onsubmit="handleAddProjectSubmit(event)" class="space-y-4">
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Project Title *</label>
+                <input type="text" id="newProjTitle" required class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm" placeholder="e.g. Solar Water Tank Installation">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Category *</label>
+                <select id="newProjCategory" required class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm">
+                    <option value="Water Supply">Water Supply</option>
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="Sanitation">Sanitation</option>
+                    <option value="Education">Education</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Initial Progress (%) *</label>
+                <input type="number" id="newProjProgress" min="0" max="100" value="15" required class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase mb-1">Expected Completion Date</label>
+                <input type="date" id="newProjDate" required class="w-full px-4 py-2 rounded-xl border border-slate-300 text-sm">
+            </div>
+            <button type="submit" class="w-full bg-brandAccent hover:bg-green-700 text-white font-bold py-2.5 rounded-xl shadow transition text-sm">
+                Add Project / ప్రాజెక్ట్‌ను జోడించండి
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // State Management
+        let isAdminLoggedIn = false;
+        let selectedRating = 0;
+
+        // Sample Dynamic Data Stores
+        let grievances = [
+            { id: "GRV-1001", name: "K. Srinivas", category: "Water Supply", desc: "Low water pressure in Ward 2 tap line", date: "2026-03-18", status: "In Progress" },
+            { id: "GRV-1002", name: "M. Lakshmi", category: "Electricity & Solar", desc: "Solar streetlight dark near school road", date: "2026-03-17", status: "Resolved" },
+            { id: "GRV-1003", name: "B. Venkatesh", category: "Roads & Drainage", desc: "Pothole repair required near bus shelter", date: "2026-03-19", status: "Pending" }
+        ];
+
+        let projects = [
+            { id: 1, title: "Ward 3 Underground Drainage Pipeline", category: "Sanitation", progress: 75, status: "In Progress", targetDate: "April 2026" },
+            { id: 2, title: "Main Street CC Road Paving (2.5 KM)", category: "Infrastructure", progress: 90, status: "In Progress", targetDate: "May 2026" },
+            { id: 3, title: "Solar Micro-Grid for School & Health Center", category: "Electricity", progress: 100, status: "Completed", targetDate: "Completed" },
+            { id: 4, title: "Overhead Tank Filtration Upgrade", category: "Water Supply", progress: 40, status: "In Progress", targetDate: "June 2026" }
+        ];
+
+        const galleryData = [
+            { id: 1, cat: "agriculture", title: "Smart Drip Irrigation Field", img: "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, cat: "education", title: "Primary School Digital Lab", img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80" },
+            { id: 3, cat: "sanitation", title: "Clean Village Drive", img: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80" },
+            { id: 4, cat: "infrastructure", title: "Solar LED Street Lamps", img: "images/solar.jpeg" },
+            { id: 5, cat: "agriculture", title: "Organic Fertilizer Center", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80" },
+            { id: 6, cat: "infrastructure", title: "Concrete Village Connectivity Road", img: "images/infra.jpeg" }
+            
+        ];
+
+        // Initialization
+        window.onload = function() {
+            renderGrievanceTable();
+            renderProjects();
+            renderGallery('all');
+        };
+
+        function handleGrievanceSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('citizenName').value;
+            const phone = document.getElementById('citizenPhone').value;
+            const category = document.getElementById('grievanceCategory').value;
+            const desc = document.getElementById('grievanceDesc').value;
+
+            const newId = `GRV-${Math.floor(1000 + Math.random() * 9000)}`;
+            const today = new Date().toISOString().split('T')[0];
+
+            grievances.unshift({
+                id: newId,
+                name: name,
+                category: category,
+                desc: desc,
+                date: today,
+                status: "Pending"
+            });
+
+            renderGrievanceTable();
+            document.getElementById('grievanceForm').reset();
+            showToast(`Grievance ${newId} Registered Successfully! / ఫిర్యాదు దాఖలైంది!`, "success");
+        }
+
+        function renderGrievanceTable() {
+            const tbody = document.getElementById('grievanceTableBody');
+            tbody.innerHTML = '';
+
+            grievances.forEach(g => {
+                let badgeStyle = "bg-amber-100 text-amber-800 border-amber-300";
+                if (g.status === "In Progress") badgeStyle = "bg-blue-100 text-blue-800 border-blue-300";
+                if (g.status === "Resolved") badgeStyle = "bg-emerald-100 text-emerald-800 border-emerald-300";
+
+                const row = document.createElement('tr');
+                row.className = "hover:bg-slate-50/80 transition";
+                row.innerHTML = `
+                    <td class="p-3 font-mono font-bold text-slate-800">${g.id}</td>
+                    <td class="p-3">
+                        <div class="font-semibold text-slate-900">${g.name}</div>
+                        <div class="text-xs text-slate-500">${g.category}</div>
+                    </td>
+                    <td class="p-3 text-slate-600 text-xs">${g.date}</td>
+                    <td class="p-3">
+                        <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold border ${badgeStyle}">
+                            ${g.status}
+                        </span>
+                    </td>
+                    ${isAdminLoggedIn ? `
+                    <td class="p-3">
+                        <select onchange="updateGrievanceStatus('${g.id}', this.value)" class="text-xs p-1 rounded border border-slate-300 bg-white">
+                            <option value="Pending" ${g.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                            <option value="In Progress" ${g.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                            <option value="Resolved" ${g.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
+                        </select>
+                    </td>` : ''}
+                `;
+                tbody.appendChild(row);
+            });
+
+            // Toggle admin column header
+            const adminColHeader = document.getElementById('adminColHeader');
+            if (isAdminLoggedIn) {
+                adminColHeader.classList.remove('hidden');
+            } else {
+                adminColHeader.classList.add('hidden');
+            }
+        }
+
+        function updateGrievanceStatus(id, newStatus) {
+            const item = grievances.find(g => g.id === id);
+            if (item) {
+                item.status = newStatus;
+                renderGrievanceTable();
+                showToast(`Grievance ${id} status updated to ${newStatus}`, "info");
+            }
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('projectsGrid');
+            container.innerHTML = '';
+
+            projects.forEach(p => {
+                let statusBadge = "bg-blue-100 text-blue-800";
+                if (p.progress === 100) statusBadge = "bg-green-100 text-green-800";
+
+                const card = document.createElement('div');
+                card.className = "bg-sage-card p-6 rounded-2xl border border-sageBorder custom-shadow flex flex-col justify-between space-y-4";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-green-100 text-brandHeader border border-green-200">${p.category}</span>
+                            <span class="text-xs font-bold px-2 py-0.5 rounded-full ${statusBadge}">${p.status}</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 leading-snug">${p.title}</h4>
+                        <p class="text-xs text-slate-500 mt-1"><i class="fa-regular fa-calendar-check mr-1"></i> Target: ${p.targetDate}</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-bold">
+                            <span class="text-slate-600">Completion</span>
+                            <span class="text-brandHeader">${p.progress}%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden p-0.5">
+                            <div class="bg-brandHeader h-full rounded-full progress-bar-animated" style="width: ${p.progress}%"></div>
+                        </div>
+
+                        ${isAdminLoggedIn ? `
+                        <div class="pt-2 border-t border-slate-200 mt-2">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Live Update Slider (Admin):</label>
+                            <input type="range" min="0" max="100" value="${p.progress}" oninput="updateProjectProgress(${p.id}, this.value)" class="w-full accent-brandHeader cursor-pointer">
+                        </div>` : ''}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function updateProjectProgress(id, val) {
+            const p = projects.find(item => item.id === id);
+            if (p) {
+                p.progress = parseInt(val);
+                p.status = p.progress === 100 ? "Completed" : "In Progress";
+                renderProjects();
+            }
+        }
+
+        function renderGallery(filterCategory) {
+            const container = document.getElementById('galleryGrid');
+            container.innerHTML = '';
+
+            const filtered = filterCategory === 'all' ? galleryData : galleryData.filter(g => g.cat === filterCategory);
+
+            filtered.forEach(item => {
+                const galleryCard = document.createElement('div');
+                galleryCard.className = "group relative rounded-xl overflow-hidden border border-sageBorder bg-slate-100 shadow-sm transform hover:-translate-y-1 transition duration-300";
+                galleryCard.innerHTML = `
+                    <div class="h-44 bg-cover bg-center" style="background-image: url('${item.img}');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-3">
+                        <span class="text-xs text-white font-medium">${item.title}</span>
+                    </div>
+                `;
+                container.appendChild(galleryCard);
+            });
+        }
+
+        function filterGallery(cat) {
+            renderGallery(cat);
+            document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+                btn.className = "gallery-filter-btn bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition";
+            });
+            event.target.className = "gallery-filter-btn bg-brandHeader text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition";
+        }
+
+        function setRating(stars) {
+            selectedRating = stars;
+            const container = document.getElementById('starRatingContainer');
+            const icons = container.querySelectorAll('i');
+            icons.forEach((icon, index) => {
+                if (index < stars) {
+                    icon.className = "fa-solid fa-star cursor-pointer text-amber-400 text-2xl transition";
+                } else {
+                    icon.className = "fa-solid fa-star cursor-pointer text-slate-300 text-2xl transition";
+                }
+            });
+        }
+
+        function handleFeedbackSubmit(e) {
+            e.preventDefault();
+            if (selectedRating === 0) {
+                showToast("Please select a star rating! / దయచేసి రేటింగ్ ఎంచుకోండి", "info");
+                return;
+            }
+            showToast("Thank you for your valuable feedback! / మీ అభిప్రాయానికి ధన్యవాదాలు!", "success");
+            document.getElementById('feedbackForm').reset();
+            setRating(0);
+        }
+
+        function toggleAdminModal() {
+            if (isAdminLoggedIn) {
+                // Logout
+                isAdminLoggedIn = false;
+                document.getElementById('adminBtnText').innerText = "Admin Login";
+                document.getElementById('adminBtnIcon').className = "fa-solid fa-lock";
+                document.getElementById('addProjectAdminContainer').classList.add('hidden');
+                renderGrievanceTable();
+                renderProjects();
+                showToast("Admin Logged Out / నిష్క్రమించారు", "info");
+            } else {
+                openModal('adminLoginModal');
+            }
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('adminUser').value;
+            const p = document.getElementById('adminPass').value;
+
+            if (u === "admin" && p === "admin123") {
+                isAdminLoggedIn = true;
+                closeAllModals();
+                document.getElementById('adminBtnText').innerText = "Logout (Admin)";
+                document.getElementById('adminBtnIcon').className = "fa-solid fa-unlock text-green-300";
+                document.getElementById('addProjectAdminContainer').classList.remove('hidden');
+                renderGrievanceTable();
+                renderProjects();
+                showToast("Admin Login Successful! / అడ్మిన్ లాగిన్ పూర్తయింది!", "success");
+            } else {
+                showToast("Invalid Credentials! Use admin / admin123", "error");
+            }
+        }
+
+        function handleAddProjectSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('newProjTitle').value;
+            const category = document.getElementById('newProjCategory').value;
+            const progress = parseInt(document.getElementById('newProjProgress').value);
+            const date = document.getElementById('newProjDate').value;
+
+            projects.push({
+                id: projects.length + 1,
+                title: title,
+                category: category,
+                progress: progress,
+                status: progress === 100 ? "Completed" : "In Progress",
+                targetDate: date
+            });
+
+            renderProjects();
+            closeAllModals();
+            showToast("New Project Added! / కొత్త ప్రాజెక్ట్ చేర్చబడింది!", "success");
+        }
+
+        function openModal(modalId) {
+            document.getElementById('modalBackdrop').classList.remove('hidden');
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeAllModals() {
+            document.getElementById('modalBackdrop').classList.add('hidden');
+            const modals = ['eduModal', 'swachhModal', 'infraModal', 'adminLoginModal', 'addProjectModal'];
+            modals.forEach(m => {
+                const el = document.getElementById(m);
+                if (el) el.classList.add('hidden');
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function showToast(message, type = "info") {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            let bg = "bg-slate-800 text-white";
+            if (type === "success") bg = "bg-emerald-700 text-white";
+            if (type === "error") bg = "bg-rose-700 text-white";
+
+            toast.className = `${bg} pointer-events-auto px-4 py-3 rounded-xl shadow-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transform transition duration-300 opacity-0 translate-y-2`;
+            toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-y-2');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>

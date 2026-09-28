@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number">
+    <script>
+        let marks=95;
+        if(marks>=90){
+            console.log("A grade")
+        }
+        else if(marks>=80){
+            console.log("B grade")
+        }
+        else{
+            console.log("fail")
+        }
+        let studentname="syam";
+        let totalquestions=10;
+        let completedquestions=10;
+        let mark=(completedquestions/totalquestions)*100;
+        console.log(marks)
+        let passed=mark>=30;
+        console.log(passed)
+        let quizcompleted="true"
+        console.log(quizcompleted)
+        if(passed&&quizcompleted){
+            console.log(studentname+"passed");
+            console.log("mark",mark);
+
+        }
+        else{
+            console.log(studentname+"fail");
+        }
+
+    </script>
+</body>
+</html>

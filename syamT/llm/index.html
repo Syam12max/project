@@ -1,0 +1,19 @@
+//html
+input box-->id-->user_input
+submit button--> oneclick-> send request to server -->name : sendrequest(user_input)
+Response will appear here -->in a box
+
+// css
+
+//scriprt js
+<script>
+   async function sendrequest(user_input){
+    const response = fetch("https://3h0jj9j1-5000.inc1.devtunnels.ms/ask_my_llm",{
+        method: "POST",
+        headers:{
+            'content-type': "application/json",
+        },
+    })
+
+   }
+</script>

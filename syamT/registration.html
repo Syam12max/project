@@ -1,0 +1,90 @@
+
+<html>
+    <head>
+        <title>registration</title>
+        <link rel="stylesheets" href="app.css">
+        
+    <style>
+        body{
+            background-color: lightblue;
+            font-family: Arial, Helvetica, sans-serif;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            background-color:white;
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1{
+            text-align: center;
+            color: blue;
+            
+        }
+        input,select,textarea{
+            padding:8px;
+            margin:5px;
+            
+        }
+        button{
+            background-color:brown;
+            color:brown;
+            border: 10px;
+            box-shadow: 0 0 10px;
+            border-radius:10px;
+        }
+        button:hover{
+            background-color:yellow;
+            color:black;
+        }
+    </style>
+</head>
+    <body>
+        <h1>registration form</h1>
+        <form>
+        <label for="first">first name:</label>
+        <input type="text" id="first" placeholder="first name"><br><br>
+        <label for="last">last name:</label>
+        <input type="text" id="last" placeholder="last name">
+        <br><br>
+        <label for="age">age:</label>
+        <input type="number" id="age" placeholder="enter age">
+        <br><br>
+        <label for="email">email:</label>
+        <input type="email" id="email" placeholder="enter email">
+        <br><br>
+        <label for="psd">password:</label>
+        <input type="password" id="psd" placeholder="enter password">
+        <br><br>
+        <label for="mobile">phone number:</label>
+        <input type="tel" id="mobile" maxlength="10" placeholder="enter phone number" required="">
+        <br><br>
+        <label>gender:</label>
+        <input type="radio" name="gender">male
+        <input type="radio" name="gender">female
+        <br><br>
+        <label for="dob">date of birth:</label>
+        <input type="date" id="dob">
+        <br><br>
+        <label for="course">course:</label>
+        <select id="course">
+            <option value="html">html</option>
+            <option value="css">css</option>
+            <option value="python">python</option>
+            <option value="java">java</option>
+        </select>
+        <br><br>
+        <label>address:</label>
+        <br>
+        <textarea rows="3" cols="50" placeholder="enter address"></textarea>
+        <br><br>
+        <input type="checkbox">
+        i agree to terms and conditions
+        <br><br>
+        <button type="submit">register</button>
+        <button type="reset">clear</button>
+        </form>
+    </body>
+
+</html>

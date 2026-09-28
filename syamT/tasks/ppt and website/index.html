@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Excellence College</title>
+
+    <!-- ================= CSS ================= -->
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* ---------- HEADER ---------- */
+
+        header {
+            background: white;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            width: 45px;
+            height: 45px;
+            background: #1683e8;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo h2 {
+            color: #222;
+            font-size: 20px;
+        }
+
+        .logo p {
+            font-size: 11px;
+            color: #777;
+        }
+
+        /* ---------- NAVBAR ---------- */
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #1683e8;
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            min-height: 600px;
+
+            background:
+                linear-gradient(rgba(0, 93, 190, 0.82),
+                rgba(0, 93, 190, 0.82)),
+                url("https://images.unsplash.com/photo-1562774053-701939374585");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            color: white;
+            padding: 50px 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 14px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1683e8;
+        }
+
+        .btn-secondary {
+            background: #1683e8;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* ---------- ABOUT ---------- */
+
+        .section {
+            padding: 70px 8%;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+            color: #123b63;
+        }
+
+        .section > p {
+            max-width: 700px;
+            margin: auto;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* ---------- CARDS ---------- */
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 280px;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            color: #1683e8;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* ---------- COURSES ---------- */
+
+        .courses {
+            background: #eef6ff;
+        }
+
+        .course-card {
+            background: white;
+            width: 300px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .course-card h3 {
+            color: #123b63;
+            margin-bottom: 10px;
+        }
+
+        /* ---------- ADMISSION ---------- */
+
+        .admission {
+            background: #123b63;
+            color: white;
+        }
+
+        .admission h2 {
+            color: white;
+        }
+
+        .admission p {
+            color: #ddd;
+        }
+
+        /* ---------- FORM ---------- */
+
+        .form-box {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .form-box input,
+        .form-box select {
+            width: 100%;
+            padding: 13px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-box button {
+            width: 100%;
+            padding: 13px;
+            background: #1683e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* ---------- CONTACT ---------- */
+
+        .contact {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+        .contact-box {
+            background: white;
+            padding: 25px;
+            width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            background: #071d32;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* ---------- MOBILE ---------- */
+
+        @media (max-width: 768px) {
+
+            header {
+                height: auto;
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+
+            <div class="logo-box">
+                🎓
+            </div>
+
+            <div>
+                <h2>Excellence College</h2>
+                <p>Empowering Minds • Shaping Futures</p>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#academics">Academics</a>
+            <a href="#courses">Courses</a>
+            <a href="#admission">Admissions</a>
+            <a href="#contact">Contact</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= HOME ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <h1>
+                Empowering Minds,<br>
+                Shaping Futures
+            </h1>
+
+            <p>
+                Excellence in Education Since 1985
+            </p>
+
+            <button class="btn btn-primary"
+                onclick="exploreCourses()">
+                Explore Programs
+            </button>
+
+            <button class="btn btn-secondary"
+                onclick="applyNow()">
+                Apply Now
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="section" id="about">
+
+        <h2>About Our College</h2>
+
+        <p>
+            Excellence College is committed to providing quality education,
+            developing innovative thinking and preparing students for a
+            successful future.
+        </p>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">🎓</div>
+
+                <h3>Quality Education</h3>
+
+                <p>
+                    We provide quality education with experienced faculty
+                    and modern teaching methods.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">👨‍🏫</div>
+
+                <h3>Expert Faculty</h3>
+
+                <p>
+                    Our experienced faculty members guide students
+                    throughout their academic journey.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">🏫</div>
+
+                <h3>Modern Campus</h3>
+
+                <p>
+                    Students get access to modern classrooms,
+                    laboratories and campus facilities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ACADEMICS ================= -->
+
+    <section class="section" id="academics">
+
+        <h2>Academics</h2>
+
+        <p>
+            Our academic programs focus on knowledge, practical skills
+            and overall student development.
+        </p>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">📚</div>
+
+                <h3>Learning</h3>
+
+                <p>
+                    Interactive and practical learning environment.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">💻</div>
+
+                <h3>Technology</h3>
+
+                <p>
+                    Technology-based learning and computer facilities.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">🔬</div>
+
+                <h3>Research</h3>
+
+                <p>
+                    Encouraging students to develop research and innovation.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= COURSES ================= -->
+
+    <section class="section courses" id="courses">
+
+        <h2>Our Programs</h2>
+
+        <p>
+            Choose from our wide range of academic programs.
+        </p>
+
+
+        <div class="cards">
+
+            <div class="course-card">
+
+                <h3>B.Sc Computer Science</h3>
+
+                <p>
+                    Programming, Web Development and Computer Science.
+                </p>
+
+            </div>
+
+
+            <div class="course-card">
+
+                <h3>B.Com</h3>
+
+                <p>
+                    Accounting, Finance, Business and Management.
+                </p>
+
+            </div>
+
+
+            <div class="course-card">
+
+                <h3>BBA</h3>
+
+                <p>
+                    Business Administration, Marketing and Management.
+                </p>
+
+            </div>
+
+
+            <div class="course-card">
+
+                <h3>MCA</h3>
+
+                <p>
+                    Advanced Computer Applications and Software Development.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ADMISSION ================= -->
+
+    <section class="section admission" id="admission">
+
+        <h2>Apply For Admission</h2>
+
+        <p>
+            Start your journey with Excellence College.
+        </p>
+
+
+        <div class="form-box">
+
+            <input type="text"
+                id="studentName"
+                placeholder="Enter your name">
+
+            <input type="email"
+                id="email"
+                placeholder="Enter your email">
+
+            <input type="tel"
+                id="phone"
+                placeholder="Enter phone number">
+
+
+            <select id="course">
+
+                <option value="">
+                    Select Course
+                </option>
+
+                <option>B.Sc Computer Science</option>
+
+                <option>B.Com</option>
+
+                <option>BBA</option>
+
+                <option>MCA</option>
+
+            </select>
+
+
+            <button onclick="submitForm()">
+                Submit Application
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="section" id="contact">
+
+        <h2>Contact Us</h2>
+
+        <p>
+            Get in touch with Excellence College.
+        </p>
+
+
+        <div class="contact">
+
+            <div class="contact-box">
+
+                <h3>📍 Address</h3>
+
+                <p>
+                    Excellence College,<br>
+                    Hyderabad, Telangana
+                </p>
+
+            </div>
+
+
+            <div class="contact-box">
+
+                <h3>📞 Phone</h3>
+
+                <p>
+                    +91 98765 43210
+                </p>
+
+            </div>
+
+
+            <div class="contact-box">
+
+                <h3>📧 Email</h3>
+
+                <p>
+                    info@excellencecollege.com
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 Excellence College. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function exploreCourses() {
+
+            document
+                .getElementById("courses")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        function applyNow() {
+
+            document
+                .getElementById("admission")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        function submitForm() {
+
+            let name =
+                document.getElementById("studentName").value;
+
+            let email =
+                document.getElementById("email").value;
+
+            let phone =
+                document.getElementById("phone").value;
+
+            let course =
+                document.getElementById("course").value;
+
+
+            if (name === "" ||
+                email === "" ||
+                phone === "" ||
+                course === "") {
+
+                alert("Please fill all the details.");
+
+            } else {
+
+                alert(
+                    "Application submitted successfully!\n\n" +
+                    "Student: " + name +
+                    "\nCourse: " + course
+                );
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .formcontainer{
+            width: 300px;
+            padding: 20px;
+            border: 20px solid olive;
+            margin: 0 auto;
+        }
+        .formrow{
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+        }
+        .formrowlabel{
+padding: 8px;
+        }
+        .formrowinput{
+            padding: 8px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+  <div>
+    <div class="formcontainer">
+        <div class="formrow">
+            <label for="email">email:</label>
+            <input type="email" id="email" placeholder="enter email">
+        </div>
+        <div class="formrow">
+            <label for="psd">password</label>
+            <input type="password" id="psd" placeholder="enter password">
+        </div>
+<br><br>
+        <div class="btn">
+            <button type="submit">login</button>
+        </div>
+    </div>
+  </div>  
+</body>
+</html>

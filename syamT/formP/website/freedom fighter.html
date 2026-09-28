@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Indian Freedom Fighters</title>
+
+    <style>
+        /* Remove default spacing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Whole page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to right, #ff9933, white, #138808);
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            color: #222;
+            font-size: 38px;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Navigation bar */
+        nav {
+            background-color: #222;
+            text-align: center;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 17px;
+        }
+
+        nav a:hover {
+            color: #ff9933;
+        }
+
+        /* Hero section */
+        .hero {
+            background-color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero h2 {
+            color: #d35400;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* Freedom fighter section */
+        .fighters {
+            padding: 40px 8%;
+        }
+
+        .fighters h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 30px;
+        }
+
+        /* Card container */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        /* Individual card */
+        .card {
+            background-color: white;
+            width: 280px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        /* Card image */
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        /* Card text */
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-content h3 {
+            color: #e67e22;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* Quote section */
+        .quote {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 20px;
+        }
+
+        .quote h2 {
+            color: #ffcc80;
+            margin-bottom: 15px;
+        }
+
+        .quote p {
+            font-size: 20px;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Mobile screen */
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            nav a {
+                display: block;
+                margin: 10px;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>🇮🇳 Indian Freedom Fighters 🇮🇳</h1>
+        <p>Remembering the Heroes of India's Freedom Struggle</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#fighters">Freedom Fighters</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+
+        <h2>Our Great Freedom Fighters</h2>
+
+        <p>
+            India's freedom was achieved through the courage,
+            sacrifice and determination of many brave people.
+            They worked in different ways to help India become
+            an independent nation.
+        </p>
+
+    </section>
+
+    <!-- Freedom Fighters -->
+    <section class="fighters" id="fighters">
+
+        <h2>Famous Freedom Fighters</h2>
+
+        <div class="card-container">
+
+            <!-- Gandhi -->
+            <div class="card">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Mohandas%20K.%20Gandhi%2C%20portrait.jpg"
+                    alt="Mahatma Gandhi">
+
+                <div class="card-content">
+
+                    <h3>Mahatma Gandhi</h3>
+
+                    <p>
+                        Mahatma Gandhi was one of the most important
+                        leaders of India's freedom movement.
+                        He believed in non-violence and peaceful protest.
+                    </p>
+
+                </div>
+            </div>
+
+
+            <!-- Bhagat Singh -->
+            <div class="card">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Bhagat%20Singh%201929.jpg"
+                    alt="Bhagat Singh">
+
+                <div class="card-content">
+
+                    <h3>Bhagat Singh</h3>
+
+                    <p>
+                        Bhagat Singh was a young revolutionary who
+                        became an important symbol of courage and
+                        sacrifice in India's freedom struggle.
+                    </p>
+
+                </div>
+            </div>
+
+
+            <!-- Subhas Chandra Bose -->
+            <div class="card">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Subhas%20chandra%20bose%20%281%29.jpg"
+                    alt="Subhas Chandra Bose">
+
+                <div class="card-content">
+
+                    <h3>Subhas Chandra Bose</h3>
+
+                    <p>
+                        Subhas Chandra Bose was a strong leader who
+                        led the Indian National Army and inspired
+                        many Indians to fight for freedom.
+                    </p>
+
+                </div>
+            </div>
+
+
+            <!-- Rani Lakshmibai -->
+            <div class="card">
+
+                <img
+                    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Rani%20Lakshmibai%20contemporary%20portrait.jpg"
+                    alt="Rani Lakshmibai">
+
+                <div class="card-content">
+
+                    <h3>Rani Lakshmibai</h3>
+
+                    <p>
+                        Rani Lakshmibai of Jhansi was a brave leader
+                        of the 1857 uprising and became a symbol of
+                        courage and determination.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Quote -->
+    <section class="quote">
+
+        <h2>Remember Our Heroes</h2>
+
+        <p>
+            "Their courage and sacrifice will always be remembered."
+        </p>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="hero" id="about">
+
+        <h2>About This Website</h2>
+
+        <p>
+            This website is created for students to learn about
+            some of India's famous freedom fighters.
+            We should respect and remember their contribution
+            to India's history.
+        </p>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            © 2026 Indian Freedom Fighters | Student Project
+        </p>
+
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,565 @@
+/* ================= GENERAL ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f7fa;
+    color: #222;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* ================= NAVBAR ================= */
+
+header {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    background-color: #111827;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 8%;
+}
+
+.logo {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #38bdf8;
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 90vh;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url("https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.hero-content {
+    color: white;
+    max-width: 800px;
+    padding: 30px;
+}
+
+.hero-content h1 {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+
+    background-color: #0ea5e9;
+    color: white;
+
+    padding: 13px 25px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #0284c7;
+    transform: translateY(-2px);
+}
+
+
+/* ================= COMMON SECTION ================= */
+
+section {
+    padding: 80px 8%;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.section-text {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+
+/* ================= SPORTS ================= */
+
+.sports-section {
+    background-color: white;
+}
+
+.sports-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 25px;
+}
+
+.sports-card {
+    background-color: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.12);
+
+    transition: 0.3s;
+}
+
+.sports-card:hover {
+    transform: translateY(-10px);
+}
+
+.sports-card img {
+    height: 230px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.card-content button,
+.membership-card button,
+.contact-form button {
+    border: none;
+
+    background-color: #0ea5e9;
+
+    color: white;
+
+    padding: 11px 20px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.card-content button:hover,
+.membership-card button:hover,
+.contact-form button:hover {
+    background-color: #0284c7;
+}
+
+
+/* ================= ABOUT ================= */
+
+.about-section {
+    background-color: #eaf4f8;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 50px;
+
+    align-items: center;
+}
+
+.about-image img {
+    height: 400px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+}
+
+.about-content h2 {
+    text-align: left;
+}
+
+.about-content p {
+    color: #555;
+
+    margin-bottom: 20px;
+
+    font-size: 17px;
+}
+
+
+/* ================= FACILITIES ================= */
+
+.facilities-section {
+    background-color: white;
+}
+
+.facility-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 25px;
+
+    margin-top: 40px;
+}
+
+.facility-box {
+    text-align: center;
+
+    background-color: #f8fafc;
+
+    padding: 30px 20px;
+
+    border-radius: 10px;
+
+    border: 1px solid #e5e7eb;
+}
+
+.facility-icon {
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+.facility-box h3 {
+    margin-bottom: 10px;
+}
+
+.facility-box p {
+    color: #666;
+}
+
+
+/* ================= MEMBERSHIP ================= */
+
+.membership-section {
+    background-color: #eef6ff;
+}
+
+.membership-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 30px;
+
+    margin-top: 40px;
+}
+
+.membership-card {
+    background-color: white;
+
+    padding: 35px 25px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.1);
+
+    position: relative;
+}
+
+.membership-card h3 {
+    font-size: 26px;
+
+    margin-bottom: 15px;
+}
+
+.membership-card h4 {
+    color: #0ea5e9;
+
+    font-size: 28px;
+
+    margin-bottom: 20px;
+}
+
+.membership-card p {
+    margin: 10px 0;
+
+    color: #555;
+}
+
+.membership-card button {
+    margin-top: 15px;
+}
+
+.popular {
+    border: 3px solid #0ea5e9;
+}
+
+.popular-text {
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background-color: #0ea5e9;
+    color: white;
+
+    padding: 5px 20px;
+
+    border-radius: 0 0 8px 8px;
+
+    font-size: 13px;
+}
+
+
+/* ================= CONTACT ================= */
+
+.contact-section {
+    background-color: #111827;
+
+    color: white;
+}
+
+.contact-section h2 {
+    margin-bottom: 50px;
+}
+
+.contact-container {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 50px;
+
+    max-width: 1000px;
+
+    margin: auto;
+}
+
+.contact-info {
+    padding: 20px;
+}
+
+.contact-info h3 {
+    font-size: 28px;
+
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin: 15px 0;
+
+    color: #d1d5db;
+}
+
+.contact-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    outline: none;
+
+    font-family: Arial;
+}
+
+.contact-form button {
+    width: 150px;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    background-color: #030712;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 30px 10px;
+}
+
+footer h3 {
+    font-size: 24px;
+
+    margin-bottom: 10px;
+}
+
+footer p {
+    color: #9ca3af;
+
+    margin: 5px 0;
+}
+
+
+/* ================= RESPONSIVE DESIGN ================= */
+
+@media (max-width: 1000px) {
+
+    .sports-container {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .facility-container {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .hero-content h1 {
+        font-size: 45px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 15px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 18px;
+    }
+
+    .sports-container {
+        grid-template-columns: 1fr;
+    }
+
+    .about-section {
+        grid-template-columns: 1fr;
+    }
+
+    .facility-container {
+        grid-template-columns: 1fr;
+    }
+
+    .membership-container {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    section {
+        padding: 60px 5%;
+    }
+
+    section h2 {
+        font-size: 30px;
+    }
+
+    .hero {
+        min-height: 80vh;
+    }
+
+    .hero-content h1 {
+        font-size: 30px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+}
